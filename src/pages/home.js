@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import fire from '../components/firebase.js';
 import imagefile from '../photo.jpg';
+import './home.css'
 
 
 
