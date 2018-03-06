@@ -1,8 +1,38 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import fire from '../components/firebase.js';
+import imagefile from '../photo.jpg';
 
-class Home extends React.Component {
+
+
+
+
+
+class ProductCard extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      productItems:[],
+
+    }};
+
+    render(){
+      return(
+        <div className='product-card'>
+          <img src={imagefile}/>
+          <li>
+            <span>Pearl Earring</span>
+            <span>$45</span>
+          </li>
+          <li>The materail:xxx</li>
+        </div>
+
+        )};
+
+}
+
+
+class ProductList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -45,6 +75,7 @@ class Home extends React.Component {
 
          })}
         </ul>
+        <ProductCard/>
         
         <Link to="/detail-page">Details</Link>;
       </div>
@@ -55,4 +86,4 @@ class Home extends React.Component {
 
 
 
-export default Home;
+export default ProductList;
