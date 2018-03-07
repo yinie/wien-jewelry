@@ -1,7 +1,47 @@
-$font-stack:    Helvetica, sans-serif;
-$primary-color: #f00;
+$font-stack:  Avenir, sans-serif;
+$primary-color: #555;
 
 body {
   font: 100% $font-stack;
   color: $primary-color;
 }
+
+.nav{
+	text-align: center;
+	height: 80px;
+	background-color: #EEF7FD;
+}
+
+
+.page-container{
+	max-width: 1100px;
+	padding-top: 32px;
+	padding-left: 16px;
+	padding-right: 16px;
+	display: block;
+	margin: 0 auto;
+
+}
+
+.card-description{
+
+  padding-bottom: 8px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-card{
+	width: 30%; 
+	padding: 16px 16px;
+	display: inline-block;
+	font-size: 16px;
+}
+
+.card-img{
+	width: 100%;
+}
+

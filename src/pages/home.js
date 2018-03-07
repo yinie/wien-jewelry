@@ -13,24 +13,25 @@ class ProductCard extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      productItems:[],
+      
 
     }};
 
     render(){
       return(
         <div className='product-card'>
-          <img src={imagefile}/>
-          <li>
-            <span>Pearl Earring</span>
-            <span>$45</span>
-          </li>
-          <li>The materail:xxx</li>
+          <img className='card-img' src={imagefile}/>
+          <div className='card-description'>
+            <span>Pearl Earring</span> <span>$45</span>
+          </div>
+          <div>The materail:xxx</div>
         </div>
 
         )};
 
 }
+
+
 
 
 class ProductList extends React.Component {
@@ -64,7 +65,13 @@ class ProductList extends React.Component {
   render() {
     return (
       <div> 
-        <h1>Home page</h1>;
+        <div className="nav">Top Nav</div>
+        <div className="page-container">
+          <ProductCard/>
+          <ProductCard/>
+          <ProductCard/>
+          
+        </div>
         <ul>
          {this.state.personState.map((person)=>{
                   return(
@@ -76,7 +83,7 @@ class ProductList extends React.Component {
 
          })}
         </ul>
-        <ProductCard/>
+        
         
         <Link to="/detail-page">Details</Link>;
       </div>
