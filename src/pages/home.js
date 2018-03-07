@@ -30,8 +30,10 @@ class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productItems:[]
+      productItems:[],
+      sCatagory:'earring'
     };
+    this.onFilterClick = this.onFilterClick.bind(this);
   }
 
   componentDidMount(){
@@ -45,7 +47,7 @@ class ProductList extends React.Component {
           name: Items[item].itemName,
           price: Items[item].price,
           material: Items[item].material,
-          category: Items[item].category,
+          catagory: Items[item].category,
           image: Items[item].images.image1
         });
       };
@@ -55,13 +57,28 @@ class ProductList extends React.Component {
     });
   }
 
+  onFilterClick(e){
+    console.log("Click");
+    console.log(e.target.dataset.category);
+    let cCatagory = e.target.dataset.category
+    this.setState({
+      sCatagory: cCatagory
+    })
+  }
+
   render() {
     return (
       <div> 
         <div className="nav">Top Nav</div>
+        <div className="filter">
+          <button data-category="earring" onClick={this.onFilterClick}>Earring</button>
+          <button data-category="necklace" onClick={this.onFilterClick}>Necklace</button>
+          <button data-category="ring" onClick={this.onFilterClick}>Rings</button>
+          <button data-category="bracelet" onClick={this.onFilterClick}>Bracelets</button>
+        </div>
         <div className="page-container">
           {
-            this.state.productItems.map((item) => {
+            this.state.productItems.filter(item=> item.catagory === this.state.sCatagory).map((item) => {
               return(
                 <ProductCard key={item.itemId} name={item.name} price={item.price} image={item.image}/>
               )

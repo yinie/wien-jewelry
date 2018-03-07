@@ -12,8 +12,23 @@ body {
 	background-color: #EEF7FD;
 }
 
+.filter{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+
+  li{
+  	padding-right: 16px;
+  	pointer-events: none;
+  }
+}
 
 .page-container{
+	display: flex;
 	max-width: 1100px;
 	padding-top: 32px;
 	padding-left: 16px;
