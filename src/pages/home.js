@@ -4,6 +4,31 @@ import fire from '../components/firebase.js';
 import './home.css'
 
 
+class Fliter extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {}
+    this.handleFilter = this.handleFilter.bind(this);
+  };
+
+  handleFilter(e){
+    this.props.onFilterClick(e.target.dataset.catagory)
+  }
+
+  render(){
+    return(
+      <div className="filter">
+        <button data-catagory="all" onClick={this.handleFilter}>All</button>
+        <button data-catagory="earring" onClick={this.handleFilter}>Earring</button>
+        <button data-catagory="necklace" onClick={this.handleFilter}>Necklace</button>
+        <button data-catagory="ring" onClick={this.handleFilter}>Rings</button>
+        <button data-catagory="bracelet" onClick={this.handleFilter}>Bracelets</button>
+      </div>
+
+    )
+  }
+}
+
 class ProductCard extends React.Component{
 
   constructor(props){
@@ -31,7 +56,7 @@ class ProductList extends React.Component {
     super(props);
     this.state = {
       productItems:[],
-      sCatagory:'earring'
+      sCatagory:'all'
     };
     this.onFilterClick = this.onFilterClick.bind(this);
   }
@@ -57,28 +82,29 @@ class ProductList extends React.Component {
     });
   }
 
-  onFilterClick(e){
-    console.log("Click");
-    console.log(e.target.dataset.category);
-    let cCatagory = e.target.dataset.category
+  onFilterClick(cCatagory){
     this.setState({
       sCatagory: cCatagory
     })
   }
 
   render() {
+    function catagoryFilter(Items,sCatagory) {
+      if (sCatagory != "all"){
+        return Items.filter(item => item.catagory === sCatagory)
+      }else{
+        return Items
+      }
+      
+    }
+
     return (
       <div> 
         <div className="nav">Top Nav</div>
-        <div className="filter">
-          <button data-category="earring" onClick={this.onFilterClick}>Earring</button>
-          <button data-category="necklace" onClick={this.onFilterClick}>Necklace</button>
-          <button data-category="ring" onClick={this.onFilterClick}>Rings</button>
-          <button data-category="bracelet" onClick={this.onFilterClick}>Bracelets</button>
-        </div>
+        <Fliter onFilterClick={this.onFilterClick}/>
         <div className="page-container">
           {
-            this.state.productItems.filter(item=> item.catagory === this.state.sCatagory).map((item) => {
+            catagoryFilter(this.state.productItems, this.state.sCatagory).map((item) => {
               return(
                 <ProductCard key={item.itemId} name={item.name} price={item.price} image={item.image}/>
               )

@@ -16,8 +16,7 @@ body {
   justify-content: center;
   list-style: none; }
   .filter li {
-    padding-right: 16px;
-    pointer-events: none; }
+    padding-right: 16px; }
 
 .page-container {
   display: flex;
