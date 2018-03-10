@@ -1,15 +1,47 @@
 $font-stack:  Avenir, sans-serif;
-$primary-color: #555;
+$primary-text-color: #555;
+$primary-color: #C99D66;
 
 body {
   font: 100% $font-stack;
-  color: $primary-color;
+  color: $primary-text-color;
 }
 
-.nav{
-	text-align: center;
-	height: 80px;
-	background-color: #EEF7FD;
+.wien-nav{
+    font-size: 13px;
+    font-weight: 500;
+	padding: 24px 64px;
+}
+
+.wien-logo{
+	display: block;
+	margin: 0 auto;
+	width: 96px;
+	padding-bottom: 24px;
+}
+
+.nav-description{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+
+  ul{
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+  	justify-content: space-between;
+  	padding: 0px;
+  	list-style-type: none;
+
+  	li{
+  		padding-right: 30px;
+  	}
+  }
 }
 
 .filter{
@@ -21,9 +53,21 @@ body {
   justify-content: center;
   list-style: none;
 
-  li{
-  	padding-right: 16px;
-  	
+  button{
+  	color: $primary-color;
+  	font-size: 13px;
+  	background-color: transparent;
+  	border: none;
+  	text-transform: uppercase;
+  	letter-spacing: 1px;
+  	padding: 16px 24px;
+  	cursor: pointer;
+  }
+
+  button:focus{
+  	outline: 0;
+  	font-weight: 700;
+  	font-size: 14px;
   }
 }
 
@@ -54,6 +98,11 @@ body {
 	padding: 16px 16px;
 	display: inline-block;
 	font-size: 16px;
+	
+}
+
+a{
+	color: #555;
 }
 
 .card-img{

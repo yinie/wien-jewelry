@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import fire from '../components/firebase.js';
-import './home.css'
+import './home.css';
+import wienLogo from '../wien-logo.png'
 
+//Router test 
+
+
+
+class WienNav extends React.Component{
+  render(){
+    return(
+      <div className="wien-nav">
+        <img className="wien-logo" src={wienLogo}/>
+        <div className="nav-description">
+          <p>Free Shipping - On US/CHIN oders over $55</p>
+          <div>
+            <ul>
+              <li>Sign in</li>
+              <li>English</li>
+              <li>Wechat</li>
+              <li>Instagram</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
 
 class Fliter extends React.Component{
   constructor(props){
@@ -39,13 +64,15 @@ class ProductCard extends React.Component{
 
   render(){
     return (
-      <div className='product-card'>
-        <img className='card-img' src={this.props.image}/>
-        <div className='card-description'>
-          <span>{this.props.name}</span> <span>{"$" + this.props.price}</span>
+      <Link to={"/detail-page/"+this.props.item.itemId} target="_blank">
+        <div className='product-card'>
+          <img className='card-img' src={this.props.item.image.image1}/>
+          <div className='card-description'>
+            <span>{this.props.item.name}</span> <span>{"$" + this.props.item.price}</span>
+          </div>
+          <div>{"The materail: " + this.props.item.material}</div>
         </div>
-        <div>The materail:xxx</div>
-      </div>
+      </Link>
     );
   };
 }
@@ -73,7 +100,7 @@ class ProductList extends React.Component {
           price: Items[item].price,
           material: Items[item].material,
           catagory: Items[item].category,
-          image: Items[item].images.image1
+          image: Items[item].images
         });
       };
       this.setState({
@@ -100,18 +127,19 @@ class ProductList extends React.Component {
 
     return (
       <div> 
-        <div className="nav">Top Nav</div>
+        <WienNav />
         <Fliter onFilterClick={this.onFilterClick}/>
         <div className="page-container">
           {
             catagoryFilter(this.state.productItems, this.state.sCatagory).map((item) => {
               return(
-                <ProductCard key={item.itemId} name={item.name} price={item.price} image={item.image}/>
+                <ProductCard key={item.itemId} material={item.material} item={item}/>
               )
             })  
           }  
         </div>
         <Link to="/detail-page">Details</Link>;
+        
       </div>
 
     )
