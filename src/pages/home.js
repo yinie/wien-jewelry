@@ -4,10 +4,6 @@ import fire from '../components/firebase.js';
 import './home.css';
 import wienLogo from '../wien-logo.png'
 
-//Router test 
-
-
-
 class WienNav extends React.Component{
   render(){
     return(
@@ -66,9 +62,9 @@ class ProductCard extends React.Component{
     return (
       <Link to={"/detail-page/"+this.props.item.itemId} target="_blank">
         <div className='product-card'>
-          <img className='card-img' src={this.props.item.image.image1}/>
+          <img className='card-img' src={this.props.item.images[0]}/>
           <div className='card-description'>
-            <span>{this.props.item.name}</span> <span>{"$" + this.props.item.price}</span>
+            <span>{this.props.item.itemName}</span> <span>{"$" + this.props.item.price}</span>
           </div>
           <div>{"The materail: " + this.props.item.material}</div>
         </div>
@@ -88,27 +84,6 @@ class ProductList extends React.Component {
     this.onFilterClick = this.onFilterClick.bind(this);
   }
 
-  componentDidMount(){
-    const itemsFirebase = fire.database().ref('Items');
-    itemsFirebase.once('value', (snapshot)=>{
-      let Items = snapshot.val();
-      let newItems = [];
-      for(let item in Items){
-        newItems.push({
-          itemId : item,
-          name: Items[item].itemName,
-          price: Items[item].price,
-          material: Items[item].material,
-          catagory: Items[item].category,
-          image: Items[item].images
-        });
-      };
-      this.setState({
-        productItems: newItems
-      });
-    });
-  }
-
   onFilterClick(cCatagory){
     this.setState({
       sCatagory: cCatagory
@@ -117,10 +92,14 @@ class ProductList extends React.Component {
 
   render() {
     function catagoryFilter(Items,sCatagory) {
+      const itemsArray = Object.entries(Items).map(item => {
+        item[1].itemId = item[0];
+        return item[1]
+      });
       if (sCatagory != "all"){
-        return Items.filter(item => item.catagory === sCatagory)
+        return itemsArray.filter(item => item.category === sCatagory)
       }else{
-        return Items
+        return itemsArray
       }
       
     }
@@ -131,9 +110,9 @@ class ProductList extends React.Component {
         <Fliter onFilterClick={this.onFilterClick}/>
         <div className="page-container">
           {
-            catagoryFilter(this.state.productItems, this.state.sCatagory).map((item) => {
+            catagoryFilter(this.props.productItems, this.state.sCatagory).map((item,index) => {
               return(
-                <ProductCard key={item.itemId} material={item.material} item={item}/>
+                <ProductCard key={index} item={item}/>
               )
             })  
           }  
