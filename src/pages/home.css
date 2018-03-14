@@ -1,3 +1,18 @@
+@media only screen and (min-width: 992px) {
+  .product-card {
+    width: 30%;
+    padding: 16px 16px; } }
+
+@media only screen and (max-width: 991px) and (min-width: 500px) {
+  .product-card {
+    width: 46%;
+    padding: 8px 8px; } }
+
+@media only screen and (max-width: 499px) and (min-width: 300px) {
+  .product-card {
+    width: 100%;
+    padding: 8px 8px; } }
+
 body {
   font: 100% Avenir, sans-serif;
   color: #555; }
@@ -39,7 +54,8 @@ body {
   display: -webkit-flex;
   display: flex;
   justify-content: center;
-  list-style: none; }
+  list-style: none;
+  overflow: hidden; }
   .filter button {
     color: #C99D66;
     font-size: 13px;
@@ -73,8 +89,6 @@ body {
   justify-content: space-between; }
 
 .product-card {
-  width: 30%;
-  padding: 16px 16px;
   display: inline-block;
   font-size: 16px; }
 

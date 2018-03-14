@@ -2,6 +2,31 @@ $font-stack:  Avenir, sans-serif;
 $primary-text-color: #555;
 $primary-color: #C99D66;
 
+
+
+@media only screen and (min-width:992px){
+	.product-card{
+		width: 30%;
+		padding: 16px 16px; 
+	}
+
+}
+
+@media only screen  and (max-width:991px) and (min-width: 500px){
+	.product-card{
+		width: 46%;
+		padding: 8px 8px;
+	}
+}
+
+@media only screen  and (max-width:499px) and (min-width: 300px){
+	.product-card{
+		width: 100%;
+		padding: 8px 8px;
+	}
+}
+
+
 body {
   font: 100% $font-stack;
   color: $primary-text-color;
@@ -52,6 +77,7 @@ body {
   display: flex;
   justify-content: center;
   list-style: none;
+  overflow: hidden;
 
   button{
   	color: $primary-color;
@@ -94,11 +120,9 @@ body {
 }
 
 .product-card{
-	width: 30%; 
-	padding: 16px 16px;
+	
 	display: inline-block;
 	font-size: 16px;
-	
 }
 
 a{
