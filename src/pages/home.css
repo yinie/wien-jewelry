@@ -1,17 +1,43 @@
 @media only screen and (min-width: 992px) {
   .product-card {
     width: 30%;
-    padding: 16px 16px; } }
+    padding: 16px 16px; }
+  .nav-description {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between; } }
 
 @media only screen and (max-width: 991px) and (min-width: 500px) {
   .product-card {
     width: 46%;
-    padding: 8px 8px; } }
+    padding: 8px 8px; }
+  .menu-desktop {
+    display: none; }
+  .nav-description {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center; }
+  .menu-icon {
+    position: absolute;
+    top: 24px;
+    left: 48px; } }
 
-@media only screen and (max-width: 499px) and (min-width: 300px) {
+@media only screen and (max-width: 499px) {
   .product-card {
     width: 100%;
-    padding: 8px 8px; } }
+    padding: 8px 8px; }
+  .menu-desktop {
+    display: none; }
+  .menu-icon {
+    position: absolute;
+    top: 24px;
+    left: 48px; } }
 
 body {
   font: 100% Avenir, sans-serif;
@@ -28,24 +54,43 @@ body {
   width: 96px;
   padding-bottom: 24px; }
 
-.nav-description {
+.nav-description ul {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  justify-content: space-between; }
-  .nav-description ul {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    justify-content: space-between;
-    padding: 0px;
-    list-style-type: none; }
-    .nav-description ul li {
-      padding-right: 30px; }
+  justify-content: space-between;
+  padding: 0px;
+  list-style-type: none; }
+  .nav-description ul li {
+    padding-right: 30px; }
+
+.menu-mobile {
+  visibility: hidden;
+  width: 200px;
+  background-color: grey;
+  position: absolute;
+  top: 48px;
+  left: -200px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column; }
+
+.menu-hide {
+  visibility: hidden;
+  transform: translateX(-200px);
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease; }
+
+.menu-display {
+  visibility: visible;
+  transform: translateX(200px);
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease; }
 
 .filter {
   display: -webkit-box;

@@ -1,6 +1,7 @@
 $font-stack:  Avenir, sans-serif;
 $primary-text-color: #555;
 $primary-color: #C99D66;
+$menu-width: 200px;
 
 
 
@@ -10,6 +11,15 @@ $primary-color: #C99D66;
 		padding: 16px 16px; 
 	}
 
+	.nav-description{
+	  display: -webkit-box;
+	  display: -moz-box;
+	  display: -ms-flexbox;
+	  display: -webkit-flex;
+	  display: flex;
+	  justify-content: space-between;
+	}
+
 }
 
 @media only screen  and (max-width:991px) and (min-width: 500px){
@@ -17,12 +27,39 @@ $primary-color: #C99D66;
 		width: 46%;
 		padding: 8px 8px;
 	}
+	.menu-desktop{
+		display: none;
+	}
+	.nav-description{
+		display: -webkit-box;
+	    display: -moz-box;
+	    display: -ms-flexbox;
+	    display: -webkit-flex;
+	    display: flex;
+		justify-content: center;
+
+	}
+	.menu-icon{
+		position: absolute;
+		top: 24px;
+		left: 48px;
+	}
 }
 
-@media only screen  and (max-width:499px) and (min-width: 300px){
+@media only screen  and (max-width:499px) {
 	.product-card{
 		width: 100%;
 		padding: 8px 8px;
+	}
+	.menu-desktop{
+		display: none;
+
+	}
+
+	.menu-icon{
+		position: absolute;
+		top: 24px;
+		left: 48px;
 	}
 }
 
@@ -31,6 +68,8 @@ body {
   font: 100% $font-stack;
   color: $primary-text-color;
 }
+
+
 
 .wien-nav{
     font-size: 13px;
@@ -46,12 +85,7 @@ body {
 }
 
 .nav-description{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  justify-content: space-between;
+  
 
   ul{
 	display: -webkit-box;
@@ -68,6 +102,38 @@ body {
   	}
   }
 }
+
+
+.menu-mobile{
+	visibility: hidden;
+	width: $menu-width;
+	background-color: grey;
+	position: absolute;
+	top: 48px;
+	left: -$menu-width;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.menu-hide{
+	visibility: hidden;
+	transform: translateX(-$menu-width);
+	transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+}
+.menu-display{
+	visibility: visible;
+	transform: translateX($menu-width);
+	transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+
+}
+
 
 .filter{
   display: -webkit-box;

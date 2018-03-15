@@ -2,16 +2,41 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import fire from '../components/firebase.js';
 import './home.css';
+import '../font-awesome/css/fontawesome-all.css'
 import wienLogo from '../wien-logo.png'
 
+
 class WienNav extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      menuVisible:false,
+      menuClass: 'menu-mobile'
+    }
+    this.burgerToggle = this.burgerToggle.bind(this)
+
+  };
+
+  burgerToggle() {
+      console.log('hah')
+      if ( this.state.menuVisible == false){
+        this.setState({menuVisible: true, menuClass:'menu-mobile menu-display'});
+      }else{
+        this.setState({menuVisible: false, menuClass:'menu-mobile menu-hide'});
+      }
+    }
+
   render(){
+   
+   
     return(
       <div className="wien-nav">
-        <img className="wien-logo" src={wienLogo}/>
+
+        <span className="menu-icon" onClick={this.burgerToggle}><i className="fa fa-spinner fa-spin"></i></span>
+        <img className="wien-logo"  src={wienLogo}/>
         <div className="nav-description">
           <p>Free Shipping - On US/CHIN oders over $55</p>
-          <div>
+          <div className='menu-desktop'>
             <ul>
               <li>Sign in</li>
               <li>English</li>
@@ -20,10 +45,21 @@ class WienNav extends React.Component{
             </ul>
           </div>
         </div>
+        <div>
+          <ul className={this.state.menuClass}>
+              <li>Sign in</li>
+              <li>English</li>
+              <li>Wechat</li>
+              <li>Instagram</li>
+          </ul>
+        </div>
       </div>
     )
   }
 }
+
+
+
 
 class Fliter extends React.Component{
   constructor(props){
