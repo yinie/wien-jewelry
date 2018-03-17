@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import fire from '../components/firebase.js';
-import './home.css';
+import './shop.css';
 import '../font-awesome/css/fontawesome-all.css'
 import wienLogo from '../wien-logo.png'
 
@@ -18,11 +18,13 @@ class WienNav extends React.Component{
   };
 
   burgerToggle() {
-      console.log('hah')
+      let overLay = document.querySelector('.overlay');
       if ( this.state.menuVisible == false){
         this.setState({menuVisible: true, menuClass:'menu-mobile menu-display'});
+        overLay.style.display = 'block';
       }else{
         this.setState({menuVisible: false, menuClass:'menu-mobile menu-hide'});
+        overLay.style.display = 'none';
       }
     }
 
@@ -32,27 +34,38 @@ class WienNav extends React.Component{
     return(
       <div className="wien-nav">
 
-        <span className="menu-icon" onClick={this.burgerToggle}><i className="fa fa-spinner fa-spin"></i></span>
+        <span className="menu-icon" onClick={this.burgerToggle}><i className="fas fa-bars"></i></span>
         <img className="wien-logo"  src={wienLogo}/>
-        <div className="nav-description">
-          <p>Free Shipping - On US/CHIN oders over $55</p>
+        <div className="nav-description"> 
+          <p>Free Shipping - On US/CHIN oders over $55</p>  
           <div className='menu-desktop'>
             <ul>
-              <li>Sign in</li>
-              <li>English</li>
-              <li>Wechat</li>
-              <li>Instagram</li>
+              <li><Link to="/detail-page">Home</Link></li>
+              <li><Link to="/detail-page">Shop</Link></li>
+              <li><Link to="/detail-page">Blog</Link></li>
+              <li><Link to="/detail-page">About</Link></li>
+              <li><a href="https://www.instagram.com/wien_jewelry/"><i className="fab fa-instagram font-icon"></i></a></li>
+              <li><a href=""><i className="fab fa-weixin font-icon"></i></a></li>
             </ul>
           </div>
+     
+            
+            
+            
+            
+        
         </div>
         <div>
           <ul className={this.state.menuClass}>
-              <li>Sign in</li>
-              <li>English</li>
-              <li>Wechat</li>
-              <li>Instagram</li>
+              <li><Link to="/detail-page"><i class="fas fa-home font-icon"></i>Home</Link></li>
+              <li><Link to="/detail-page"><i class="fas fa-shopping-bag font-icon"></i>Shop</Link></li>
+              <li><Link to="/detail-page"><i class="fas fa-rss-square font-icon"></i>Blog</Link></li>
+              <li><Link to="/detail-page"><i class="fas fa-rss-square font-icon"></i>About</Link></li>
+              <li><a href=""><i className="fab fa-weixin font-icon"></i>Wechat</a></li>
+              <li><a href="https://www.instagram.com/wien_jewelry/"><i className="fab fa-instagram font-icon"></i>Instagram</a></li>
           </ul>
         </div>
+        <div className="overlay"></div>
       </div>
     )
   }
@@ -100,9 +113,9 @@ class ProductCard extends React.Component{
         <div className='product-card'>
           <img className='card-img' src={this.props.item.images[0]}/>
           <div className='card-description'>
-            <span>{this.props.item.itemName}</span> <span>{"$" + this.props.item.price}</span>
+            <span>{this.props.item.itemName}</span> <span className="price">{"$" + this.props.item.price}</span>
           </div>
-          <div>{"The materail: " + this.props.item.material}</div>
+          <div>{"material: " + this.props.item.material}</div>
         </div>
       </Link>
     );

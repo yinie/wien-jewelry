@@ -7,8 +7,9 @@ $menu-width: 200px;
 
 @media only screen and (min-width:992px){
 	.product-card{
-		width: 30%;
-		padding: 16px 16px; 
+		width: 29%;
+		padding-left: 2%; 
+		padding-right: 2%;
 	}
 
 	.nav-description{
@@ -20,12 +21,25 @@ $menu-width: 200px;
 	  justify-content: space-between;
 	}
 
+	.menu-icon{
+	  display: none !important;
+
+	}
+	.filter{
+		justify-content: center;
+	}
+
+	.font-icon{
+		margin-right: -30px;
+	}
+
 }
 
 @media only screen  and (max-width:991px) and (min-width: 500px){
 	.product-card{
 		width: 46%;
-		padding: 8px 8px;
+		padding-left: 2%;
+		padding-right: 2%;
 	}
 	.menu-desktop{
 		display: none;
@@ -37,38 +51,73 @@ $menu-width: 200px;
 	    display: -webkit-flex;
 	    display: flex;
 		justify-content: center;
+		text-align: center;
 
 	}
-	.menu-icon{
-		position: absolute;
-		top: 24px;
-		left: 48px;
+
+	.filter{
+		justify-content: center;
 	}
+
+	.font-icon{
+		padding-right: 8px;
+		color:rgba(0,0,0,0.3);
+	}
+
 }
 
 @media only screen  and (max-width:499px) {
 	.product-card{
-		width: 100%;
-		padding: 8px 8px;
+		width: 96%;
+		padding-left: 2% ;
+		padding-right: 2%;
 	}
 	.menu-desktop{
 		display: none;
 
 	}
-
-	.menu-icon{
-		position: absolute;
-		top: 24px;
-		left: 48px;
+	.nav-description{
+		text-align: center;
+		font-size: 12px;
 	}
+
+	.filter{
+		justify-content: flex-start;
+
+		button{
+			padding-top: 0px !important;
+			padding-bottom: 0px !important;
+		}
+	}
+
+	.wien-logo{
+		width: 72px !important;
+	}
+
+	.font-icon{
+		padding-right: 8px;
+		color:rgba(0,0,0,0.3);
+	}
+
+	
 }
 
 
 body {
-  font: 100% $font-stack;
+  
   color: $primary-text-color;
 }
 
+
+
+.menu-icon{
+	position: absolute;
+	color: $primary-text-color;
+	font-size: 18px;
+	top: 24px;
+	left: 24px;
+	z-index: 5;
+}
 
 
 .wien-nav{
@@ -97,6 +146,7 @@ body {
   	padding: 0px;
   	list-style-type: none;
 
+
   	li{
   		padding-right: 30px;
   	}
@@ -105,11 +155,12 @@ body {
 
 
 .menu-mobile{
-	visibility: hidden;
+	margin: 0;
+	padding-top: 54px;
 	width: $menu-width;
-	background-color: grey;
+	height: 100%;
 	position: absolute;
-	top: 48px;
+	top: 0px;
 	left: -$menu-width;
 	display: -webkit-box;
 	display: -moz-box;
@@ -117,6 +168,15 @@ body {
 	display: -webkit-flex;
 	display: flex;
 	flex-direction: column;
+	z-index: 3;
+	visibility: hidden;
+	background-color: #fff;
+	list-style-type: none;
+	text-transform: uppercase;
+
+	li{
+		padding-top: 32px;
+	}
 
 }
 
@@ -124,13 +184,13 @@ body {
 	visibility: hidden;
 	transform: translateX(-$menu-width);
 	transition: all 1s ease;
-	-webkit-transition: all 1s ease;
+	-webkit-transition: all 0.6s ease;
 }
 .menu-display{
 	visibility: visible;
 	transform: translateX($menu-width);
 	transition: all 1s ease;
-	-webkit-transition: all 1s ease;
+	-webkit-transition: all 0.6s ease;
 
 }
 
@@ -141,9 +201,10 @@ body {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  justify-content: center;
   list-style: none;
-  overflow: hidden;
+  overflow: scroll;
+
+
 
   button{
   	color: $primary-color;
@@ -151,7 +212,7 @@ body {
   	background-color: transparent;
   	border: none;
   	text-transform: uppercase;
-  	letter-spacing: 1px;
+  	letter-spacing: 1.5px;
   	padding: 16px 24px;
   	cursor: pointer;
   }
@@ -163,10 +224,16 @@ body {
   }
 }
 
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
 .page-container{
 	display: flex;
 	max-width: 1100px;
-	padding-top: 32px;
+	padding-top: 8px;
 	padding-left: 16px;
 	padding-right: 16px;
 	display: block;
@@ -176,7 +243,7 @@ body {
 
 .card-description{
 
-  padding-bottom: 8px;
+  padding-top: 8px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -185,10 +252,21 @@ body {
   justify-content: space-between;
 }
 
-.product-card{
-	
-	display: inline-block;
+.price{
+	font-weight: 600;
 	font-size: 16px;
+	font-family: 'Cormorant Garamond', serif;
+}
+
+.product-card{
+	padding-top: 8px;
+	padding-bottom: 48px;
+	font-size: 11px;
+	color: rgba(0,0,0,0.7);
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	display: inline-block;
 }
 
 a{
@@ -199,3 +277,22 @@ a{
 	width: 100%;
 }
 
+
+.overlay{
+	position: absolute; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+}
+
+.font-icon{
+	font-size: 16px;
+
+	
+}

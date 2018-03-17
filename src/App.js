@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import fire from './components/firebase.js';
-import ProductList from './pages/home.js'; 
+import ProductList from './pages/shop.js'; 
 import DetailPage from './pages/detail.js';
 
 

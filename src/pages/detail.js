@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import fire from '../components/firebase.js';
-import ProductCard from './home.js'
-import './home.css';
+import ProductCard from './shop.js'
+import './shop.css';
 
 
 class DetailPage extends React.Component {
