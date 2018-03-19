@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import fire from './components/firebase.js';
 import ProductList from './pages/shop.js'; 
 import DetailPage from './pages/detail.js';
+import Homepage from './pages/home.js';
 
 
 
@@ -24,7 +25,8 @@ class App extends React.Component{
       return(
         <Router>
           <div>
-            <Route exact path="/" render={() => <ProductList productItems={this.state.productItems}/>} />
+            <Route  exact path="/" render={() => <Homepage />} />
+            <Route path="/shop" render={() => <ProductList productItems={this.state.productItems}/>} />
             <Route path="/detail-page/:id" render={({match}) => <DetailPage match={match} productItems={this.state.productItems}/>} />
           </div>
         </Router>

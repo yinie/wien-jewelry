@@ -41,26 +41,20 @@ class WienNav extends React.Component{
           <div className='menu-desktop'>
             <ul>
               <li><Link to="/detail-page">Home</Link></li>
-              <li><Link to="/detail-page">Shop</Link></li>
+              <li><Link to="/">Shop</Link></li>
               <li><Link to="/detail-page">Blog</Link></li>
               <li><Link to="/detail-page">About</Link></li>
               <li><a href="https://www.instagram.com/wien_jewelry/"><i className="fab fa-instagram font-icon"></i></a></li>
               <li><a href=""><i className="fab fa-weixin font-icon"></i></a></li>
             </ul>
           </div>
-     
-            
-            
-            
-            
-        
         </div>
         <div>
           <ul className={this.state.menuClass}>
-              <li><Link to="/detail-page"><i class="fas fa-home font-icon"></i>Home</Link></li>
-              <li><Link to="/detail-page"><i class="fas fa-shopping-bag font-icon"></i>Shop</Link></li>
-              <li><Link to="/detail-page"><i class="fas fa-rss-square font-icon"></i>Blog</Link></li>
-              <li><Link to="/detail-page"><i class="fas fa-rss-square font-icon"></i>About</Link></li>
+              <li><Link to="/detail-page"><i className="fas fa-home font-icon"></i>Home</Link></li>
+              <li><Link to="/detail-page"><i className="fas fa-shopping-bag font-icon"></i>Shop</Link></li>
+              <li><Link to="/detail-page"><i className="fas fa-rss-square font-icon"></i>Blog</Link></li>
+              <li><Link to="/detail-page"><i className="fas fa-rss-square font-icon"></i>About</Link></li>
               <li><a href=""><i className="fab fa-weixin font-icon"></i>Wechat</a></li>
               <li><a href="https://www.instagram.com/wien_jewelry/"><i className="fab fa-instagram font-icon"></i>Instagram</a></li>
           </ul>
