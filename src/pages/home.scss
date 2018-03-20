@@ -7,11 +7,14 @@ ul {
 
 .carousel-container{
 	overflow:hidden;
+	position: relative;
+	width: 96%;
+	margin: 0 auto;
 }
 
 .carousel{	 
   white-space:nowrap;
-  transition: transform 1s;
+  transition: transform 0.8s;
 }
 
 .carousel-next{
@@ -32,21 +35,25 @@ ul {
 
 
 .carousel-slide-active{
-	border: 1px solid #555;
-
- 
+	
 }
 
 
 .carousel_arrow{
 	position: absolute;
+
+	width:25px;
+	height:50px;
+	padding-top: 28px;
+	padding-left:12px;
   top: 50%;
   display: block;
-  color: #111;
+  font-size: 20px;
+  color: #fff;
   cursor: pointer;
-  opacity: .75;
+  background-color:rgba(0,0,0,0.2) ;
   transform: translateY(-50%);
-  transition: opacity .15s cubic-bezier(.4, 0, 1, 1);
+  
 }
 
 .carousel_arrow-left{

@@ -116,7 +116,7 @@ body {
 	font-size: 18px;
 	top: 24px;
 	left: 24px;
-	z-index: 5;
+	z-index: 10;
 }
 
 
@@ -129,7 +129,7 @@ body {
 .wien-logo{
 	display: block;
 	margin: 0 auto;
-	width: 96px;
+	width: 80px;
 	padding-bottom: 24px;
 }
 
@@ -157,6 +157,7 @@ body {
 .menu-mobile{
 	margin: 0;
 	padding-top: 54px;
+	padding-left:24px;
 	width: $menu-width;
 	height: 100%;
 	position: absolute;
@@ -168,11 +169,10 @@ body {
 	display: -webkit-flex;
 	display: flex;
 	flex-direction: column;
-	z-index: 3;
+	z-index: 6;
 	visibility: hidden;
 	background-color: #fff;
 	list-style-type: none;
-	text-transform: uppercase;
 
 	li{
 		padding-top: 32px;
