@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from 'react';
+import { Link } from "react-router-dom";
 import '../pages/shop.css';
 import '../font-awesome/css/fontawesome-all.css'
 import wienLogo from '../wien-logo.png'
@@ -19,7 +19,7 @@ class WienNav extends React.Component{
 
   burgerToggle() {
       let overLay = document.querySelector('.overlay');
-      if ( this.state.menuVisible == false){
+      if ( this.state.menuVisible === false){
         this.setState({menuVisible: true, menuClass:'menu-mobile menu-display'});
         overLay.style.display = 'block';
       }else{
@@ -35,7 +35,7 @@ class WienNav extends React.Component{
       <div className="wien-nav">
 
         <span className="menu-icon" onClick={this.burgerToggle}><i className="fas fa-bars"></i></span>
-        <img className="wien-logo"  src={wienLogo}/>
+        <img alt="Wien logo" className="wien-logo"  src={wienLogo}/>
         <div className="nav-description"> 
           <p>Free Shipping - On US/CHIN oders over $55</p>  
           <div className='menu-desktop'>

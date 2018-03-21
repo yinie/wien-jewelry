@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import fire from '../components/firebase.js';
+import React from 'react';
+import { Link } from "react-router-dom";
 import './shop.css';
 import '../font-awesome/css/fontawesome-all.css'
 import WienNav from '../components/WienNav.js'
@@ -45,7 +44,7 @@ class ProductCard extends React.Component{
     return (
       <Link to={"/detail-page/"+this.props.item.itemId} target="_blank">
         <div className='product-card'>
-          <img className='card-img' src={this.props.item.images[0]}/>
+          <img alt={this.props.item.itemName} className='card-img' src={this.props.item.images[0]}/>
           <div className='card-description'>
             <span>{this.props.item.itemName}</span> <span className="price">{"$" + this.props.item.price}</span>
           </div>
@@ -79,7 +78,7 @@ class ProductList extends React.Component {
         item[1].itemId = item[0];
         return item[1]
       });
-      if (sCatagory != "all"){
+      if (sCatagory !== "all"){
         return itemsArray.filter(item => item.category === sCatagory)
       }else{
         return itemsArray

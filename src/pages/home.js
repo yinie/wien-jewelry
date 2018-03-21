@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from 'react';
+import { Link } from "react-router-dom";
 import '../font-awesome/css/fontawesome-all.css'
 import './home.css'
 import WienNav from '../components/WienNav.js'
@@ -29,9 +29,9 @@ const carouselSlidesData = [
 class CarouselLeftArrow extends React.Component{
 	render(){
 		return(
-			<a href="#"className="carousel_arrow carousel_arrow-left" onClick={this.props.onClick}>
-        <span><i class="fas fa-chevron-left"></i></span>
-      </a>
+			<button  className="carousel_arrow carousel_arrow-left" onClick={this.props.onClick}>
+        <span><i className="fas fa-chevron-left"></i></span>
+      </button>
 		)
 	}
 }
@@ -39,9 +39,9 @@ class CarouselLeftArrow extends React.Component{
 class CarouselRightArrow extends React.Component{
 	render(){
 		return(
-			<a href="#" className="carousel_arrow carousel_arrow-right" onClick={this.props.onClick}>
-        <span><i class="fas fa-chevron-right"></i></span>
-      </a>
+			<button className="carousel_arrow carousel_arrow-right" onClick={this.props.onClick}>
+        <span><i className="fas fa-chevron-right"></i></span>
+      </button>
 		)
 	}
 }
@@ -51,11 +51,11 @@ class CarouselSlide extends React.Component{
 		return(
 
 			<li className={
-          this.props.index == this.props.activeIndex
+          this.props.index === this.props.activeIndex
             ? "carousel-slide carousel-slide-active"
             : "carousel-slide"
         }>
-			<img src={this.props.slide.img} />
+			<img alt={this.props.slide.legend} src={this.props.slide.img} />
 			<p>{this.props.slide.legend}</p>
 			</li>
 		)

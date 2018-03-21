@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import fire from '../components/firebase.js';
-import ProductCard from './shop.js'
+import React from 'react';
+import { Link } from "react-router-dom";
 import './shop.css';
 
 
@@ -23,11 +21,10 @@ class DetailPage extends React.Component {
   	if (this.state.sProduct){
 	    return (
 	    	<div>
-	    		<h1></h1>
 	    		<Link to="/">Home</Link>
 	    		<p>Name: {this.state.sProduct.itemName}</p>
 	    		<p>Price: {this.state.sProduct.price}</p>
-	    		<img className="product-card" src={this.state.sProduct.images[0]} />
+	    		<img alt={this.state.sProduct.itemName} className="product-card" src={this.state.sProduct.images[0]} />
 	    	</div>
 	    )
 	  }else{
