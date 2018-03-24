@@ -4,6 +4,7 @@ import fire from './components/firebase.js';
 import ProductList from './pages/shop.js'; 
 import DetailPage from './pages/detail.js';
 import Homepage from './pages/home.js';
+import AdminProducts from './pages/adminProducts.js'
 
 
 
@@ -26,6 +27,7 @@ class App extends React.Component{
         <Router>
           <div>
             <Route  exact path="/" render={() => <Homepage />} />
+            <Route path="/admin" render={() => <AdminProducts />} />
             <Route path="/shop" render={() => <ProductList productItems={this.state.productItems}/>} />
             <Route path="/detail-page/:id" render={({match}) => <DetailPage match={match} productItems={this.state.productItems}/>} />
           </div>
