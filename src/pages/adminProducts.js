@@ -2,6 +2,35 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import fire from '../components/firebase.js';
 
+class ImageUpload extends React.Component{
+	constructor(props){
+		super(props);
+		this.onUpload = this.onUpload.bind(this);
+	}
+
+	onUpload(){
+  	const curFiles = this.fileUpload.files;
+  	console.log(curFiles)
+  	var storageRef = fire.storage().ref();
+		var mountainImagesRef = storageRef.child('images/mountains.jpg');
+		mountainImagesRef.put(curFiles[0]).then(function(snapshot) {
+  		console.log(snapshot);
+		});
+  }
+
+	render(){
+		return(
+			<div>
+				<label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+    		<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" ref={(ref) => this.fileUpload = ref} onChange={this.onUpload}/>
+    		<div className="preview">
+				  <p>No files currently selected for upload</p>
+				 </div>
+			</div>
+		)
+	}
+}
+
 class ProductForm extends React.Component{
 	constructor(props){
 		super(props);
@@ -13,7 +42,6 @@ class ProductForm extends React.Component{
       images:['https://cdn2.dropmarkusercontent.com/257180/7c54be4973a0cd129d68087f0735aab4af1a4433/737B5294-min.jpg']
 		}
 		this.onSubmit = this.onSubmit.bind(this);
-		this.onUpload = this.onUpload.bind(this);
 	}
 
   onChange = (e) => {
@@ -32,15 +60,7 @@ class ProductForm extends React.Component{
   	fire.database().ref().update(updates);
   }
 
-  onUpload(){
-  	const curFiles = this.fileUpload.files;
-  	console.log(curFiles)
-  	var storageRef = fire.storage().ref();
-		var mountainImagesRef = storageRef.child('images/mountains.jpg');
-		mountainImagesRef.put(curFiles[0]).then(function(snapshot) {
-  		console.log(snapshot,snapshot.val());
-		});
-  }
+  
 
 
 
@@ -65,14 +85,10 @@ class ProductForm extends React.Component{
 						Price
 						<input type="text" name="price" value={price} onChange={this.onChange} />
 					</label>
-					<div>
-						<label for="image_uploads">Choose images to upload (PNG, JPG)</label>
-    				<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple ref={(ref) => this.fileUpload = ref} onChange={this.onUpload}/>
-    				
-  				</div>
-				  <div className="preview">
-				    <p>No files currently selected for upload</p>
-				  </div>
+
+					<ImageUpload />
+					
+				  
           <button onClick={this.onSubmit}>Submit</button>
 				</form>
 			</div>
