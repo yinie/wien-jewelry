@@ -15,20 +15,26 @@ class ImageUpload extends React.Component{
 
 	onUpload(){
   	const curFiles = this.fileUpload.files;
-  	const src = window.URL.createObjectURL(curFiles[0]);
-  	const fileName = 'images/' + this.props.name + '.jpg'
   	var storageRef = fire.storage().ref();
-		var fileRef = storageRef.child(fileName);
-		fileRef.put(curFiles[0]).then((snapshot) => {
-			fileRef.getMetadata().then((metadata) =>{
-	  		const imageURL = snapshot.downloadURL
-	  		console.log('url: ' + imageURL)
-	  		this.setState({imageURL:imageURL})
-	  	
-			}).catch(function(error) {
-  		// Uh-oh, an error occurred!
-			});
-		});
+  	for (var i = 0; i<curFiles.length; i++){
+  		let random = Math.floor(Math.random() * (100 - 0)) + 0 ;
+  		let fileName = 'images/' + Date.now() +i + random + '.jpg'
+  		var fileRef = storageRef.child(fileName);
+
+  		fileRef.put(curFiles[i]).then((snapshot) => {
+				fileRef.getMetadata().then((metadata) =>{
+		  		const imageURL = snapshot.downloadURL
+		  		this.state.imageURL.push(imageURL)
+				}).catch(function(error) {
+	  		// Uh-oh, an error occurred!
+				});
+		  });
+  	}
+
+  	
+  	
+		
+	
 
 		if (curFiles.length === 0){
 			this.setState({ifImage: false})
@@ -44,16 +50,17 @@ class ImageUpload extends React.Component{
 
 	render(){
 		let preview;
-		if (this.state.imageURL != ''){
-			preview = (<img className="preview-image" alt="image preview" src={this.state.imageURL} />);
-		}else if (this.state.ifImage){
-			preview = (<p>Loading</p>);
+		let imageURL = this.state.imageURL
+
+		for (var i=0; i< imageURL.length; i++){
+			
 		}
+		
 
 		return(
 			<div>
 				<label>Choose images to upload (PNG, JPG)
-    			<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" ref={(ref) => this.fileUpload = ref} onChange={this.onUpload}/>
+    			<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" ref={(ref) => this.fileUpload = ref} multiple onChange={this.onUpload}/>
     		</label>
     		<div>{preview}</div>
 			</div>
