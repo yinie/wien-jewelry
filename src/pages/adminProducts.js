@@ -2,12 +2,15 @@ import React from 'react';
 import fire from '../components/firebase.js';
 import './adminProduct.css';
 
+
+
+
 class ImageUpload extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			ifImage: false,
-			imageURL: ''
+			imageURL: []
 		}
 		this.onUpload = this.onUpload.bind(this);
 		
@@ -24,18 +27,12 @@ class ImageUpload extends React.Component{
   		fileRef.put(curFiles[i]).then((snapshot) => {
 				fileRef.getMetadata().then((metadata) =>{
 		  		const imageURL = snapshot.downloadURL
-		  		this.state.imageURL.push(imageURL)
+		  		this.setState({imageURL: this.state.imageURL.concat([imageURL])});
 				}).catch(function(error) {
 	  		// Uh-oh, an error occurred!
 				});
 		  });
   	}
-
-  	
-  	
-		
-	
-
 		if (curFiles.length === 0){
 			this.setState({ifImage: false})
 		}else{
@@ -49,13 +46,9 @@ class ImageUpload extends React.Component{
  
 
 	render(){
-		let preview;
-		let imageURL = this.state.imageURL
-
-		for (var i=0; i< imageURL.length; i++){
-			
-		}
-		
+		let preview 
+		const imageURL = this.state.imageURL
+		preview = imageURL.map((url,index) => <img key={index} src={url}/>)
 
 		return(
 			<div>
@@ -63,6 +56,8 @@ class ImageUpload extends React.Component{
     			<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" ref={(ref) => this.fileUpload = ref} multiple onChange={this.onUpload}/>
     		</label>
     		<div>{preview}</div>
+    		
+    		
 			</div>
 		)
 	}
