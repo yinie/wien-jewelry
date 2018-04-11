@@ -9,15 +9,15 @@ class ImageUpload extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			ifImage: false,
+			imageNum: 0,
 			imageURL: []
 		}
-		this.onUpload = this.onUpload.bind(this);
-		
+		this.onUpload = this.onUpload.bind(this);	
 	}
 
 	onUpload(){
   	const curFiles = this.fileUpload.files;
+  	this.setState({imageNum: curFiles.length})	
   	var storageRef = fire.storage().ref();
   	for (var i = 0; i<curFiles.length; i++){
   		let random = Math.floor(Math.random() * (100 - 0)) + 0 ;
@@ -28,27 +28,29 @@ class ImageUpload extends React.Component{
 				fileRef.getMetadata().then((metadata) =>{
 		  		const imageURL = snapshot.downloadURL
 		  		this.setState({imageURL: this.state.imageURL.concat([imageURL])});
-				}).catch(function(error) {
-	  		// Uh-oh, an error occurred!
-				});
+				}).catch(function(error) { });
 		  });
   	}
-		if (curFiles.length === 0){
-			this.setState({ifImage: false})
-		}else{
-			this.setState({
-				ifImage: true,
-			})
-		}		
+
   }
 
 
  
 
 	render(){
-		let preview 
+		let preview
+		let loadtext 
+		console.log(this.state.imageNum)
 		const imageURL = this.state.imageURL
-		preview = imageURL.map((url,index) => <img key={index} src={url}/>)
+		const imageNum = this.state.imageNum
+		preview = imageURL.map((url,index) => {
+			return(<img key={index} src={url}/>)
+		})
+		if (imageURL.length !== imageNum && imageNum !== 0){
+			loadtext = <p>uploding</p>
+		}else(
+			loadtext= null 
+		)
 
 		return(
 			<div>
@@ -56,6 +58,7 @@ class ImageUpload extends React.Component{
     			<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" ref={(ref) => this.fileUpload = ref} multiple onChange={this.onUpload}/>
     		</label>
     		<div>{preview}</div>
+    		<div>{loadtext}</div>
     		
     		
 			</div>
