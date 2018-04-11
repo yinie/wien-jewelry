@@ -13,6 +13,11 @@ class ImageUpload extends React.Component{
 			imageURL: []
 		}
 		this.onUpload = this.onUpload.bind(this);	
+		this.handleImage = this.handleImage.bind(this);
+	}
+
+	handleImage(imageURL){
+		this.props.passImage(imageURL);
 	}
 
 	onUpload(){
@@ -26,41 +31,27 @@ class ImageUpload extends React.Component{
 
   		fileRef.put(curFiles[i]).then((snapshot) => {
 				fileRef.getMetadata().then((metadata) =>{
-		  		const imageURL = snapshot.downloadURL
+		  		const imageURL = snapshot.downloadURL;
 		  		this.setState({imageURL: this.state.imageURL.concat([imageURL])});
+		  		this.handleImage(imageURL)
 				}).catch(function(error) { });
 		  });
   	}
-
   }
-
-
  
 
 	render(){
-		let preview
-		let loadtext 
-		console.log(this.state.imageNum)
-		const imageURL = this.state.imageURL
-		const imageNum = this.state.imageNum
-		preview = imageURL.map((url,index) => {
-			return(<img key={index} src={url}/>)
-		})
-		if (imageURL.length !== imageNum && imageNum !== 0){
-			loadtext = <p>uploding</p>
-		}else(
-			loadtext= null 
-		)
-
+	
+		
 		return(
 			<div>
 				<label>Choose images to upload (PNG, JPG)
     			<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" ref={(ref) => this.fileUpload = ref} multiple onChange={this.onUpload}/>
     		</label>
-    		<div>{preview}</div>
-    		<div>{loadtext}</div>
-    		
-    		
+    		{Array(this.state.imageNum).fill('foo').map((foo, index) => {
+    			if (this.state.imageURL[index]) return <img key={index} src={this.state.imageURL[index]} />
+    			else return <p key={index}>Loading</p>
+    		})}
 			</div>
 		)
 	}
@@ -74,9 +65,10 @@ class ProductForm extends React.Component{
 			category: '',
       material: '',
       price: '',
-      images:['https://cdn2.dropmarkusercontent.com/257180/7c54be4973a0cd129d68087f0735aab4af1a4433/737B5294-min.jpg']
+      images:[]
 		}
 		this.onSubmit = this.onSubmit.bind(this);
+		this.passImage = this.passImage.bind(this);
 	}
 
   onChange = (e) => {
@@ -93,6 +85,13 @@ class ProductForm extends React.Component{
   	updates['/Items/' + newItemKey] = item;
   	console.log(newItemKey);
   	fire.database().ref().update(updates);
+  }
+
+  passImage(imageURL){
+  	const state = this.state
+  	console.log(state)
+  	state.images.push(imageURL);
+  	this.setState(state);
   }
 
   
@@ -121,7 +120,7 @@ class ProductForm extends React.Component{
 						<input type="text" name="price" value={price} onChange={this.onChange} />
 					</label>
 
-					<ImageUpload  name={itemName}/>
+					<ImageUpload  passImage={this.passImage}/>
 					
 				  
           <button onClick={this.onSubmit}>Submit</button>
