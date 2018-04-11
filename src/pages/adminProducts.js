@@ -22,7 +22,8 @@ class ImageUpload extends React.Component{
 
 	onUpload(){
   	const curFiles = this.fileUpload.files;
-  	this.setState({imageNum: curFiles.length})	
+  	let numState = this.state.imageNum
+  	this.setState({imageNum: numState + curFiles.length})	
   	var storageRef = fire.storage().ref();
   	for (var i = 0; i<curFiles.length; i++){
   		let random = Math.floor(Math.random() * (100 - 0)) + 0 ;
