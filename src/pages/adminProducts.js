@@ -1,6 +1,30 @@
 import React from 'react';
 import fire from '../components/firebase.js';
 import './adminProduct.css';
+import wienLogo from '../wien-logo.png'
+
+class AdminNav extends React.Component{
+	constructor(props){
+		super(props);
+	}
+	render(){
+		return(
+			<div className='admin-nav'>
+				<div className='nav-header'>
+					<img alt="Wien logo" className="admin-logo"  src={wienLogo}/>
+					<h2 className='nav-header-text'>product admin</h2>
+				</div>
+				<ul>
+					<li></li>
+				</ul>
+			</div>
+		)
+	}
+}
+
+
+
+
 
 
 
@@ -10,14 +34,15 @@ class ImageUpload extends React.Component{
 		super(props);
 		this.state = {
 			imageNum: 0,
-			imageURL: []
+			imageUploaded: []
 		}
 		this.onUpload = this.onUpload.bind(this);	
 		this.handleImage = this.handleImage.bind(this);
+		this.deleteImage = this.deleteImage.bind(this);
 	}
 
-	handleImage(imageURL){
-		this.props.passImage(imageURL);
+	handleImage(imageUploaded){
+		this.props.passImage(imageUploaded);
 	}
 
 	onUpload(){
@@ -32,25 +57,50 @@ class ImageUpload extends React.Component{
 
   		fileRef.put(curFiles[i]).then((snapshot) => {
 				fileRef.getMetadata().then((metadata) =>{
-		  		const imageURL = snapshot.downloadURL;
-		  		this.setState({imageURL: this.state.imageURL.concat([imageURL])});
-		  		this.handleImage(imageURL)
+		  		const imageUploaded = {imageRef: fileName ,imageURL: snapshot.downloadURL}
+		  		this.setState({imageUploaded: this.state.imageUploaded.concat([imageUploaded])});
+		  		this.handleImage(imageUploaded)
 				}).catch(function(error) { });
 		  });
   	}
   }
- 
 
-	render(){
-	
-		
+  deleteImage(e){
+  	e.preventDefault();
+  	const tempImages = JSON.parse(JSON.stringify(this.state.imageUploaded));
+  	const index = e.target.name
+  	const deleteRef = fire.storage().ref().child(tempImages[index].imageRef);
+  	const temNum = this.state.imageNum;
+  	deleteRef.delete().then(() => {
+  		console.log("image deleted!")
+  		tempImages.splice(index, 1);
+  		console.log(tempImages)
+  		this.setState({
+  			imageUploaded: tempImages,
+  			imageNum :temNum - 1
+  		});
+
+  		console.log("state updated!")
+		}).catch(function(error) {
+  		// Uh-oh, an error occurred!
+		});
+
+  }
+
+	render(){	
 		return(
 			<div>
 				<label>Choose images to upload (PNG, JPG)
     			<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" ref={(ref) => this.fileUpload = ref} multiple onChange={this.onUpload}/>
     		</label>
     		{Array(this.state.imageNum).fill('foo').map((foo, index) => {
-    			if (this.state.imageURL[index]) return <img key={index} src={this.state.imageURL[index]} />
+    			const imagePreview = this.state.imageUploaded[index]
+    			if (imagePreview ) 
+    				return (
+    					<div key={index}>
+    						<img src={imagePreview.imageURL} />
+    						<button name={index} onClick={this.deleteImage}>Delete</button>
+    					</div>)
     			else return <p key={index}>Loading</p>
     		})}
 			</div>
@@ -88,10 +138,9 @@ class ProductForm extends React.Component{
   	fire.database().ref().update(updates);
   }
 
-  passImage(imageURL){
+  passImage(imageUploaded){
   	const state = this.state
-  	console.log(state)
-  	state.images.push(imageURL);
+  	state.images.push(imageUploaded);
   	this.setState(state);
   }
 
@@ -136,8 +185,8 @@ class ProductForm extends React.Component{
 class AdminProducts extends React.Component{
 	render(){
 		return(
-			<div>
-				<h1>Admin Page</h1>
+			<div className='container'>
+				<AdminNav />
 				<ProductForm />
 			</div>
 		)
