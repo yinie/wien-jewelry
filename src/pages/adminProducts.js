@@ -1,32 +1,7 @@
 import React from 'react';
 import fire from '../components/firebase.js';
 import './adminProduct.css';
-import wienLogo from '../wien-logo.png'
-
-class AdminNav extends React.Component{
-	constructor(props){
-		super(props);
-	}
-	render(){
-		return(
-			<div className='admin-nav'>
-				<div className='nav-header'>
-					<img alt="Wien logo" className="admin-logo"  src={wienLogo}/>
-					<h2 className='nav-header-text'>product admin</h2>
-				</div>
-				<ul>
-					<li></li>
-				</ul>
-			</div>
-		)
-	}
-}
-
-
-
-
-
-
+import AdminNav from '../components/AdminNav.js';
 
 
 class ImageUpload extends React.Component{
@@ -171,8 +146,6 @@ class ProductForm extends React.Component{
 					</label>
 
 					<ImageUpload  passImage={this.passImage}/>
-					
-				  
           <button onClick={this.onSubmit}>Submit</button>
 				</form>
 			</div>
@@ -186,7 +159,7 @@ class AdminProducts extends React.Component{
 	render(){
 		return(
 			<div className='container'>
-				<AdminNav />
+				<AdminNav activeNav="products"/>
 				<ProductForm />
 			</div>
 		)

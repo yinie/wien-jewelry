@@ -5,7 +5,7 @@ import ProductList from './pages/shop.js';
 import DetailPage from './pages/detail.js';
 import Homepage from './pages/home.js';
 import AdminProducts from './pages/adminProducts.js'
-
+import AdminHome from './pages/adminHome.js'
 
 
 class App extends React.Component{
@@ -27,9 +27,11 @@ class App extends React.Component{
         <Router>
           <div>
             <Route  exact path="/" render={() => <Homepage />} />
-            <Route path="/admin" render={() => <AdminProducts />} />
+            <Route path="/admin/products" render={() => <AdminProducts />} />
+            <Route path="/admin/home" render={() => <AdminHome />} />
             <Route path="/shop" render={() => <ProductList productItems={this.state.productItems}/>} />
             <Route path="/detail-page/:id" render={({match}) => <DetailPage match={match} productItems={this.state.productItems}/>} />
+
           </div>
         </Router>
       )
