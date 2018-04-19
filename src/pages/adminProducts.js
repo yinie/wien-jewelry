@@ -5,6 +5,34 @@ import AdminNav from '../components/AdminNav.js';
 import ImageUpload from '../components/Imageupload.js'
 
 
+class AddColor extends React.Component{
+	constructor(props){
+		super(props)
+		this.state={
+			colors:'',
+			colorNum: 1
+		}
+	}
+
+	render(){
+		return(
+
+			<label className="input-label">Colors
+				<div className="form-block flex-container">
+					<label className="input-label">
+						Color
+						<input className="input-small" type="text"  /> 
+					</label>
+					<label className="input-label">
+						Inventory
+					 <input  className="input-small" type="number"/>
+					</label>
+				</div>
+				<button>+ Add Color</button>
+			</label>
+		)
+	}
+}
 
 class ProductForm extends React.Component{
 	constructor(props){
@@ -13,7 +41,7 @@ class ProductForm extends React.Component{
 			itemName: '',
 			category: '',
       material: '',
-      price: '',
+      price: '$ ',
       images:[]
 		}
 		this.onSubmit = this.onSubmit.bind(this);
@@ -42,35 +70,47 @@ class ProductForm extends React.Component{
   	this.setState(state);
   }
 
-  
-
-
-
 	render(){
 		const { itemName, category, material,price,images } = this.state;
 		return(
-			<div>
-				<form>
-					<label> 
-						Product name
-						<input type="text" name="itemName" value={itemName} onChange={this.onChange} />
-					</label>
-					<label> 
-						Category
-						<input type="text" name="category" value={category} onChange={this.onChange} />
-					</label>
-					<label> 
-						Material
-						<input type="text" name="material" value={material} onChange={this.onChange} />
-					</label>
-					<label> 
-						Price
-						<input type="text" name="price" value={price} onChange={this.onChange} />
-					</label>
+			<div className="form-container">
+				<h1>Add New Product</h1>
+				<form className="flex-container">
+					<div className="form-content-half">	
+						<label  className="input-label"> 
+							Product Name
+							<input type="text" name="itemName" value={itemName} onChange={this.onChange} />
+						</label>
+						<label  className="input-label"> 
+							Material
+							<input type="text" name="material" value={material} onChange={this.onChange} />
+						</label>
+						<label className="input-label"> 
+							Category
+							<select name="category" value={category} onChange={this.onChange}>
+								<option value="">Select category</option>
+							  <option value="earring">Earring</option>
+							  <option value="necklace">Necklace</option>
+							  <option value="rings">Rings</option>
+							  <option value="bracelets">Bracelets</option>
+							</select>
+						</label>			
+						<label className="input-label"> 
+							Price
+							<input type="text" name="price" value={price} onChange={this.onChange} />
+						</label>
+						<label className="input-label">
+							Description
+							<textarea></textarea>
+						</label>
+					</div>
 
-					<ImageUpload  passImage={this.passImage}/>
-          <button onClick={this.onSubmit}>Submit</button>
+					<div className="form-content-half">
+						<AddColor />
+						<ImageUpload  passImage={this.passImage}/>
+					</div>			
 				</form>
+				<button class="button-cta" onClick={this.onSubmit}>Save Product</button>
 			</div>
 		)
 	}
@@ -81,7 +121,7 @@ class ProductForm extends React.Component{
 class AdminProducts extends React.Component{
 	render(){
 		return(
-			<div className='container'>
+			<div className='flex-container'>
 				<AdminNav activeNav="products"/>
 				<ProductForm />
 			</div>
