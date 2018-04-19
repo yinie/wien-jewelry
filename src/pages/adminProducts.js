@@ -9,26 +9,72 @@ class AddColor extends React.Component{
 	constructor(props){
 		super(props)
 		this.state={
-			colors:'',
-			colorNum: 1
+			colors:[{color:'', inventory: undefined }],
 		}
+		this.addColor = this.addColor.bind(this)
+		this.deletColor = this.deletColor.bind(this)
+		this.colorChange = this.colorChange.bind(this)
+		this.inventoryChange = this.inventoryChange.bind(this)
+	}
+
+	addColor(e){
+		e.preventDefault();
+		const tempColors = this.state.colors
+		tempColors.push({});
+		this.setState({
+			colors: tempColors
+		})
+	}
+
+	deletColor(e){
+		e.preventDefault();
+		const tempState = JSON.parse(JSON.stringify(this.state.colors))
+		const index = e.target.dataset.index
+		tempState.splice(index, 1);
+		 this.setState({
+			colors: tempState
+		})
+	}
+
+	colorChange(e){
+		const tempState = JSON.parse(JSON.stringify(this.state.colors))
+    tempState[e.target.dataset.index].color = e.target.value;
+    this.setState({
+			colors: tempState
+		})
+	}
+
+	inventoryChange(e){
+		const tempState = JSON.parse(JSON.stringify(this.state.colors))
+    tempState[e.target.dataset.index].inventory = e.target.value;
+    this.setState({
+			colors: tempState
+		})
 	}
 
 	render(){
+		let Colors = this.state.colors
 		return(
-
 			<label className="input-label">Colors
-				<div className="form-block flex-container">
-					<label className="input-label">
-						Color
-						<input className="input-small" type="text"  /> 
-					</label>
-					<label className="input-label">
-						Inventory
-					 <input  className="input-small" type="number"/>
-					</label>
-				</div>
-				<button>+ Add Color</button>
+			{	
+
+				Colors.map((color, index) =>{
+					return(
+						<div key={index} className="form-block flex-container">
+							<label className="input-label">
+								Color
+								<input data-index={index}  className="input-small" value={Colors[index].color} type="text" onChange={this.colorChange} /> 
+							</label>
+							<label className="input-label">
+								Inventory
+							 <input data-index={index} className="input-small" value={Colors[index].inventory} type="number" onChange={this.inventoryChange}/>
+							</label>
+							<button data-index={index} onClick={this.deletColor}>x</button>
+						</div>
+					)
+				})
+			}	
+				<button onClick={this.addColor}>+ Add Color</button>
 			</label>
 		)
 	}
@@ -110,7 +156,7 @@ class ProductForm extends React.Component{
 						<ImageUpload  passImage={this.passImage}/>
 					</div>			
 				</form>
-				<button class="button-cta" onClick={this.onSubmit}>Save Product</button>
+				<button className="button-cta" onClick={this.onSubmit}>Save Product</button>
 			</div>
 		)
 	}

@@ -35,6 +35,7 @@ h1{
 	background-color: #FAFAFA;
 	height: 100vh;
 	width: 240px;
+	position:fixed;
 
 	ul{
 		padding-top: 24px;
@@ -90,6 +91,7 @@ h1{
 
 .form-container{
 	padding: 36px 64px;
+	margin-left:220px;
 }
 
 .form-content-half{
@@ -161,6 +163,7 @@ textarea:focus{
 .form-block{
 	background-color: #F7F7F7;
 	padding: 16px;
+	margin-bottom:16px;
 }
 .input-small{
 	width:170px;
