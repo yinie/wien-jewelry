@@ -1,7 +1,7 @@
 import React from 'react';
 import fire from '../components/firebase.js';
 import { Link } from "react-router-dom";
-import '../pages/adminProduct.css';
+import '../css/adminProduct.css';
 import wienLogo from '../wien-logo.png'
 
 class AdminNav extends React.Component{

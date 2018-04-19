@@ -1,6 +1,6 @@
 import React from 'react';
 import fire from '../components/firebase.js';
-import './adminProduct.css';
+import '../css/adminProduct.css';
 import AdminNav from '../components/AdminNav.js';
 
 
