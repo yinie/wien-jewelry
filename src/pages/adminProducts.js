@@ -15,6 +15,7 @@ class AddColor extends React.Component{
 		this.deletColor = this.deletColor.bind(this)
 		this.colorChange = this.colorChange.bind(this)
 		this.inventoryChange = this.inventoryChange.bind(this)
+		this.handleColorChange = this.handleColorChange.bind(this)
 	}
 
 	addColor(e){
@@ -34,6 +35,7 @@ class AddColor extends React.Component{
 		 this.setState({
 			colors: tempState
 		})
+		this.handleColorChange(tempState);
 	}
 
 	colorChange(e){
@@ -42,6 +44,7 @@ class AddColor extends React.Component{
     this.setState({
 			colors: tempState
 		})
+		this.handleColorChange(tempState);
 	}
 
 	inventoryChange(e){
@@ -50,7 +53,13 @@ class AddColor extends React.Component{
     this.setState({
 			colors: tempState
 		})
+		this.handleColorChange(tempState);
 	}
+
+	handleColorChange(colors){
+		this.props.passColor(colors);
+	}
+
 
 	render(){
 		let Colors = this.state.colors
@@ -63,7 +72,7 @@ class AddColor extends React.Component{
 						<div key={index} className="form-block flex-container">
 							<label className="input-label">
 								Color
-								<input data-index={index}  className="input-small" value={Colors[index].color} type="text" onChange={this.colorChange} /> 
+								<input data-index={index}  className="input-small" value={Colors[index].color} type="text" onChange={this.colorChange}/> 
 							</label>
 							<label className="input-label">
 								Inventory
@@ -74,7 +83,7 @@ class AddColor extends React.Component{
 					)
 				})
 			}	
-				<button onClick={this.addColor}>+ Add Color</button>
+				<button className="text-link" onClick={this.addColor}>+ Add Color</button>
 			</label>
 		)
 	}
@@ -88,10 +97,13 @@ class ProductForm extends React.Component{
 			category: '',
       material: '',
       price: '$ ',
+      description:'',
+      colors: [],
       images:[]
 		}
 		this.onSubmit = this.onSubmit.bind(this);
 		this.passImage = this.passImage.bind(this);
+		this.passColor = this.passColor.bind(this);
 	}
 
   onChange = (e) => {
@@ -103,6 +115,10 @@ class ProductForm extends React.Component{
   onSubmit(e){
   	e.preventDefault();
   	const item = this.state;
+  	console.log(item)
+
+
+
   	const newItemKey = fire.database().ref().child('Items').push().key;
   	var updates = {};
   	updates['/Items/' + newItemKey] = item;
@@ -116,8 +132,14 @@ class ProductForm extends React.Component{
   	this.setState(state);
   }
 
+  passColor(colors){
+  	const tempState = this.state;
+  	tempState.colors = colors;
+  	this.setState(tempState);
+  }
+
 	render(){
-		const { itemName, category, material,price,images } = this.state;
+		const { itemName, category, material,price,description,colors,images } = this.state;
 		return(
 			<div className="form-container">
 				<h1>Add New Product</h1>
@@ -125,7 +147,7 @@ class ProductForm extends React.Component{
 					<div className="form-content-half">	
 						<label  className="input-label"> 
 							Product Name
-							<input type="text" name="itemName" value={itemName} onChange={this.onChange} />
+							<input type="text" name="itemName" value={itemName} onChange={this.onChange}  />
 						</label>
 						<label  className="input-label"> 
 							Material
@@ -147,13 +169,16 @@ class ProductForm extends React.Component{
 						</label>
 						<label className="input-label">
 							Description
-							<textarea></textarea>
+							<textarea type="text" name="description" value={description} onChange={this.onChange}></textarea>
 						</label>
 					</div>
 
 					<div className="form-content-half">
-						<AddColor />
-						<ImageUpload  passImage={this.passImage}/>
+						<AddColor passColor={this.passColor}/>
+						<label  className="input-label">
+							Product images
+							<ImageUpload  passImage={this.passImage}/>
+						</label>
 					</div>			
 				</form>
 				<button className="button-cta" onClick={this.onSubmit}>Save Product</button>

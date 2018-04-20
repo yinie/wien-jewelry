@@ -8,6 +8,7 @@ $font-title: Playfair Display,  sans-serif;
 body{
 	padding:0px;
 	margin:0px;
+	font-family:$font-stack;
 }
 
 a{
@@ -160,6 +161,23 @@ textarea:focus{
 	color: $primary-text-color;
 
 }
+
+.fileinput-label{
+	 font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.fileinput{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
 .form-block{
 	background-color: #F7F7F7;
 	padding: 16px;
@@ -179,4 +197,19 @@ textarea:focus{
 	font-weight: 600;
 	letter-spacing: 1.5px;
 	padding: 16px 24px;
+}
+
+.text-link{
+	color: $primary-color;
+	font-size:14px;
+	font-weight: 400;
+	margin-bottom:24px;
+	margin-top:12px;
+	display:block;
+
+}
+
+.image-preview{
+	width:100px;
+	height:70px;
 }

@@ -7,6 +7,7 @@ class ImageUpload extends React.Component{
 		super(props);
 		this.state = {
 			imageNum: 0,
+      imagenames: [],
 			imageUploaded: []
 		}
 		this.onUpload = this.onUpload.bind(this);	
@@ -20,22 +21,25 @@ class ImageUpload extends React.Component{
 
 	onUpload(){
   	const curFiles = this.fileUpload.files;
-  	let numState = this.state.imageNum
+    console.log(curFiles)
+   	let numState = this.state.imageNum
   	this.setState({imageNum: numState + curFiles.length})	
   	var storageRef = fire.storage().ref();
-  	for (var i = 0; i<curFiles.length; i++){
+  	Array.from(curFiles).forEach((file,index) => {
   		let random = Math.floor(Math.random() * (100 - 0)) + 0 ;
-  		let fileName = 'images/' + Date.now() +i + random + '.jpg'
+  		let fileName = 'images/' + Date.now() +index + random + '.jpg'
   		var fileRef = storageRef.child(fileName);
-
-  		fileRef.put(curFiles[i]).then((snapshot) => {
+  		fileRef.put(file).then((snapshot) => {
 				fileRef.getMetadata().then((metadata) =>{
+        
 		  		const imageUploaded = {imageRef: fileName ,imageURL: snapshot.downloadURL}
 		  		this.setState({imageUploaded: this.state.imageUploaded.concat([imageUploaded])});
+          this.setState({imagenames: this.state.imagenames.concat([file.name])})
 		  		this.handleImage(imageUploaded)
 				}).catch(function(error) { });
 		  });
-  	}
+  	});
+   
   }
 
 
@@ -64,19 +68,26 @@ class ImageUpload extends React.Component{
 	render(){	
 		return(
 			<div>
-				<label>Choose images to upload (PNG, JPG)
-    			<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" ref={(ref) => this.fileUpload = ref} multiple onChange={this.onUpload}/>
-    		</label>
+				
     		{Array(this.state.imageNum).fill('foo').map((foo, index) => {
     			const imagePreview = this.state.imageUploaded[index]
+          const imageNames = this.state.imagenames
     			if (imagePreview ) 
     				return (
-    					<div key={index}>
-    						<img src={imagePreview.imageURL} />
+    					<div key={index} className="form-block flex-container">
+    						<img className="image-preview" src={imagePreview.imageURL} />
+                <p>{imageNames[index]}</p>
     						<button name={index} onClick={this.deleteImage}>Delete</button>
     					</div>)
-    			else return <p key={index}>Loading</p>
+    			else return (
+            <div key={index} className="form-block flex-container">
+             <p >Uploading</p>
+            </div>
+            ) 
     		})}
+        <label className="text-link">+ Upload Images
+          <input className="fileinput" type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" ref={(ref) => this.fileUpload = ref} multiple onChange={this.onUpload}/>
+        </label>
 			</div>
 		)
 	}
