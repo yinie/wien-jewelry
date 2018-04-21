@@ -1,6 +1,7 @@
 import React from 'react';
 import fire from '../components/firebase.js';
 import '../css/adminProduct.css';
+import '../font-awesome/css/fontawesome-all.css'
 import AdminNav from '../components/AdminNav.js';
 import ImageUpload from '../components/Imageupload.js'
 
@@ -78,7 +79,7 @@ class AddColor extends React.Component{
 								Inventory
 							 <input data-index={index} className="input-small" value={Colors[index].inventory} type="number" onChange={this.inventoryChange}/>
 							</label>
-							<button data-index={index} onClick={this.deletColor}>x</button>
+							<button className="button-delete"  onClick={this.deletColor}><i data-index={index} className="far fa-trash-alt"></i></button>
 						</div>
 					)
 				})

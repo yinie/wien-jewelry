@@ -91,8 +91,8 @@ h1{
 
 
 .form-container{
-	padding: 36px 64px;
-	margin-left:220px;
+	padding: 36px 0px;
+	margin-left:300px;
 }
 
 .form-content-half{
@@ -212,4 +212,15 @@ textarea:focus{
 .image-preview{
 	width:100px;
 	height:70px;
+	margin-right:64px;
+}
+.image-name{
+	padding-top:16px;
+	width: 60%;
+}
+.button-delete{
+	background-color:transparent;
+	color: $primary-color;
+	font-size: 16px;
+	padding-top:16px;
 }

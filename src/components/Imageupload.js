@@ -27,11 +27,10 @@ class ImageUpload extends React.Component{
   	var storageRef = fire.storage().ref();
   	Array.from(curFiles).forEach((file,index) => {
   		let random = Math.floor(Math.random() * (100 - 0)) + 0 ;
-  		let fileName = 'images/' + Date.now() +index + random + '.jpg'
+  		let fileName = 'images/' + Date.now() + index + random + '.jpg'
   		var fileRef = storageRef.child(fileName);
   		fileRef.put(file).then((snapshot) => {
-				fileRef.getMetadata().then((metadata) =>{
-        
+				fileRef.getMetadata().then((metadata) =>{ 
 		  		const imageUploaded = {imageRef: fileName ,imageURL: snapshot.downloadURL}
 		  		this.setState({imageUploaded: this.state.imageUploaded.concat([imageUploaded])});
           this.setState({imagenames: this.state.imagenames.concat([file.name])})
@@ -46,8 +45,10 @@ class ImageUpload extends React.Component{
   deleteImage(e){
   	e.preventDefault();
   	const tempImages = JSON.parse(JSON.stringify(this.state.imageUploaded));
-  	const index = e.target.name
+  	const index = e.target.dataset.index
+    
   	const deleteRef = fire.storage().ref().child(tempImages[index].imageRef);
+    
   	const temNum = this.state.imageNum;
   	deleteRef.delete().then(() => {
   		console.log("image deleted!")
@@ -76,12 +77,12 @@ class ImageUpload extends React.Component{
     				return (
     					<div key={index} className="form-block flex-container">
     						<img className="image-preview" src={imagePreview.imageURL} />
-                <p>{imageNames[index]}</p>
-    						<button name={index} onClick={this.deleteImage}>Delete</button>
+                <p className="image-name">{imageNames[index]}</p>
+    						<button className="button-delete" onClick={this.deleteImage}><i  data-index={index} className="far fa-trash-alt"></i></button>
     					</div>)
     			else return (
             <div key={index} className="form-block flex-container">
-             <p >Uploading</p>
+             <p ><i class="fas fa-spinner"></i> Uploading</p>
             </div>
             ) 
     		})}
