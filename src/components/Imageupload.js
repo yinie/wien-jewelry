@@ -16,7 +16,7 @@ class ImageUpload extends React.Component{
 	}
 
 	handleImage(imageUploaded){
-		this.props.passImage(imageUploaded);
+		this.props.passImage(imageUploaded.imageURL);
 	}
 
 	onUpload(){

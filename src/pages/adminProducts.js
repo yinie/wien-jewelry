@@ -97,7 +97,7 @@ class ProductForm extends React.Component{
 			itemName: '',
 			category: '',
       material: '',
-      price: '$ ',
+      price: '',
       description:'',
       colors: [],
       images:[]
@@ -166,7 +166,7 @@ class ProductForm extends React.Component{
 						</label>			
 						<label className="input-label"> 
 							Price
-							<input type="text" name="price" value={price} onChange={this.onChange} />
+							<input type="number" name="price" value={price} onChange={this.onChange} />
 						</label>
 						<label className="input-label">
 							Description
