@@ -105,6 +105,7 @@ class ProductForm extends React.Component{
 		this.onSubmit = this.onSubmit.bind(this);
 		this.passImage = this.passImage.bind(this);
 		this.passColor = this.passColor.bind(this);
+		this.refreshPage = this.refreshPage.bind(this);
 	}
 
   onChange = (e) => {
@@ -116,15 +117,28 @@ class ProductForm extends React.Component{
   onSubmit(e){
   	e.preventDefault();
   	const item = this.state;
-  	console.log(item)
+  	const itemKeys = Object.keys(item)
+  	let errorMsg = []
+  	itemKeys.forEach((itemkey) =>{
+  		if(!this.state[itemkey] || !this.state[itemkey].length  ){
+  			errorMsg.push(itemkey)
+  		}
+  	})
+  	if(!errorMsg.length){
+  		const newItemKey = fire.database().ref().child('Items').push().key;
+  		var updates = {};
+  		updates['/Items/' + newItemKey] = item;
+  		fire.database().ref().update(updates);
+  		const confModal = document.querySelector('.modal');
+  		const overLay = document.querySelector('.overlay');
+  	  confModal.style.display = 'block';
+  	  overLay.style.display = 'block';
+  	}else{
+  		alert("Pleas fill " + errorMsg +" information");
+  	}
 
 
-
-  	const newItemKey = fire.database().ref().child('Items').push().key;
-  	var updates = {};
-  	updates['/Items/' + newItemKey] = item;
-  	console.log(newItemKey);
-  	fire.database().ref().update(updates);
+  	
   }
 
   passImage(imageUploaded){
@@ -138,6 +152,10 @@ class ProductForm extends React.Component{
   	tempState.colors = colors;
   	this.setState(tempState);
   }
+
+  refreshPage(){ 
+    window.location.reload(); 
+	}
 
 	render(){
 		const { itemName, category, material,price,description,colors,images } = this.state;
@@ -183,12 +201,16 @@ class ProductForm extends React.Component{
 					</div>			
 				</form>
 				<button className="button-cta" onClick={this.onSubmit}>Save Product</button>
+				<div className="overlay"></div>
+				<div className="modal">
+					<div className="icon"><i className="fas fa-check-circle"></i></div>
+					<p className="message">Product information submit successfully!</p>
+					<button className="button-cta" onClick={this.refreshPage}>Add another product</button>
+				</div>
 			</div>
 		)
 	}
 }
-
-
 
 class AdminProducts extends React.Component{
 	render(){

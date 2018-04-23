@@ -224,3 +224,35 @@ textarea:focus{
 	font-size: 16px;
 	padding-top:16px;
 }
+
+.modal{
+	position: fixed;
+	display:none;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    width: 400px;
+    height: 250px;
+    background-color:#fff;
+    padding: 32px;
+    z-index: 5;
+    text-align:center;
+}
+.overlay{
+	position:fixed;
+	left: 0;
+	top: 0;
+	background-color:rgba(0,0,0,0.7);
+	display:none;
+	z-index:1;
+}
+
+.icon{
+	font-size:42px;
+	color: $primary-color;
+	margin-bottom:24px;
+}
+
+.message{
+	padding-bottom:36px;
+}

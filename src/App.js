@@ -6,6 +6,8 @@ import DetailPage from './pages/detail.js';
 import Homepage from './pages/home.js';
 import AdminProducts from './pages/adminProducts.js'
 import AdminHome from './pages/adminHome.js'
+import Signin from './pages/signin.js'
+import Signup from './pages/Signup.js'
 
 
 class App extends React.Component{
@@ -13,6 +15,7 @@ class App extends React.Component{
     super(props);
     this.state = {
       productItems: undefined ,
+      userInfo: undefined ,
     };
   }
 
@@ -20,6 +23,7 @@ class App extends React.Component{
     fire.database().ref('Items').once('value').then((snapshot)=>{
       this.setState({productItems: snapshot.val()});
     });
+
   }
   render(){
     if (this.state.productItems){
@@ -27,6 +31,9 @@ class App extends React.Component{
         <Router>
           <div>
             <Route  exact path="/" render={() => <Homepage />} />
+            <Route path="/signin" render={() => <Signin /> } />
+            <Route path="/signup" render={() => <Signup /> } />
+            
             <Route path="/admin/products" render={() => <AdminProducts />} />
             <Route path="/admin/home" render={() => <AdminHome />} />
             <Route path="/shop" render={() => <ProductList productItems={this.state.productItems}/>} />
