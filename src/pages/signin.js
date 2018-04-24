@@ -60,7 +60,7 @@ class Signin extends React.Component{
 				</label>
 				<label  className="input-label"> 
 					Password
-					<input type="text" name="password" onChange={this.onChange}  />
+					<input type="password" name="password" onChange={this.onChange}  />
 				</label>
 				<button className="button-cta" onClick={this.signIn}>Sign In</button>
 			</div>

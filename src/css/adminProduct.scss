@@ -163,7 +163,7 @@ textarea:focus{
 }
 
 .fileinput-label{
-	 font-size: 1.25em;
+	font-size: 1.25em;
     font-weight: 700;
     color: white;
     background-color: black;
@@ -255,4 +255,32 @@ textarea:focus{
 
 .message{
 	padding-bottom:36px;
+}
+
+.nav-profile{
+	border-top: 1px solid $divider-light;
+	margin:40px 16px;
+	margin-top: 120px;
+	text-align: center;
+
+}
+
+.button-cta-secondary{
+	background-color: transparent;
+	//border: 2px solid $primary-color;
+	color:$primary-color;
+	font-family: $font-stack;
+	font-size:13px;
+	text-transform: uppercase;
+	font-weight: 600;
+	letter-spacing: 1.5px;
+	//padding: 16px 24px;
+}
+
+
+
+.avatar{
+	margin-top:24px;
+	width:50px;
+	height:50px;
 }

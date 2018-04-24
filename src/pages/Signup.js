@@ -25,7 +25,14 @@ class Signup extends React.Component{
 	createAccount(){
 		const email = this.state.email
 		const password = this.state.password
-		fire.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+		const displayName = this.state.firstname + ' ' + this.state.lastname
+		fire.auth().createUserWithEmailAndPassword(email, password).then((user) =>
+			user.updateProfile({
+			  displayName: displayName,
+			  photoURL: "https://firebasestorage.googleapis.com/v0/b/fir-test-c19d6.appspot.com/o/images%2Favatar.png?alt=media&token=04b524fe-c184-49fa-91f9-f8fc1e09fdca"
+			})
+
+			).catch(function(error) {
   		// Handle Errors here.
   		var errorCode = error.code;
   		var errorMessage = error.message;
@@ -51,7 +58,7 @@ class Signup extends React.Component{
 				</label>
 				<label  className="input-label"> 
 					Password
-					<input type="text" name="password" onChange={this.onChange} />
+					<input type="password" name="password" onChange={this.onChange} />
 				</label>
 				<button className="button-cta" onClick={this.createAccount}>createAccount</button>
 			</div>

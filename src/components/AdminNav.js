@@ -7,6 +7,25 @@ import wienLogo from '../wien-logo.png'
 class AdminNav extends React.Component{
 	constructor(props){
 		super(props);
+		this.state={
+			userName:'',
+			photoURL:''
+		}
+
+		this.logOut = this.logOut.bind(this)
+	}
+
+	componentDidMount(){
+		const user = fire.auth().currentUser;
+		console.log(user)
+		this.setState({
+			userName: user.displayName,
+			photoURL: user.photoURL
+		})
+	}
+
+	logOut(){
+		fire.auth().signOut()
 	}
 
 	render(){
@@ -28,6 +47,11 @@ class AdminNav extends React.Component{
 						})
 					}
 				</ul>
+				<div className="nav-profile">
+					<img alt="avatar" className="avatar" src={this.state.photoURL}/>
+					<p className="input-label">{this.state.userName}</p>
+					<button className="button-cta-secondary" onClick={this.logOut}>Log out</button>
+				</div>
 			</div>
 		)
 	}
