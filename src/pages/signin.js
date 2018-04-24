@@ -4,7 +4,8 @@ import '../css/adminProduct.css';
 import '../font-awesome/css/fontawesome-all.css'
 import AdminNav from '../components/AdminNav.js';
 import ImageUpload from '../components/Imageupload.js'
-
+import {createBrowserHistory} from 'history'
+const history = createBrowserHistory({})
 
 class Signin extends React.Component{
 	constructor(props){
@@ -40,11 +41,12 @@ class Signin extends React.Component{
   signIn(){
 		const email = this.state.email
 		const password = this.state.password
-		fire.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-  		// Handle Errors here.
+		fire.auth().signInWithEmailAndPassword(email, password).then(()=>{
+			history.push('/admin/products')
+			window.location.reload() 
+		}).catch(function(error) {
   		var errorCode = error.code;
   		var errorMessage = error.message;
-  		// ...
 		});
 	}
 
