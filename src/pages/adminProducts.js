@@ -131,14 +131,11 @@ class ProductForm extends React.Component{
   		fire.database().ref().update(updates);
   		const confModal = document.querySelector('.modal');
   		const overLay = document.querySelector('.overlay');
-  	  confModal.style.display = 'block';
-  	  overLay.style.display = 'block';
+  	  	confModal.style.display = 'block';
+  	  	overLay.style.display = 'block';
   	}else{
   		alert("Pleas fill " + errorMsg +" information");
   	}
-
-
-  	
   }
 
   passImage(imageUploaded){

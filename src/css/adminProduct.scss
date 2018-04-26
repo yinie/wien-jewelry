@@ -277,10 +277,22 @@ textarea:focus{
 	//padding: 16px 24px;
 }
 
-
-
 .avatar{
 	margin-top:24px;
 	width:50px;
 	height:50px;
+}
+.auth-section{
+	padding: 64px 128px;
+}
+
+.error-msg{
+	font-size:13px;
+	color:  #fd5653;
+}
+
+.cover-img{
+	height: 700px;
+	position:absolute;
+	right:5%;
 }
