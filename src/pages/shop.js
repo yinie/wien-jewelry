@@ -10,7 +10,6 @@ import WienNav from '../components/WienNav.js'
 class Fliter extends React.Component{
   constructor(props){
     super(props);
-    this.state = {}
     this.handleFilter = this.handleFilter.bind(this);
   };
 
@@ -32,13 +31,8 @@ class Fliter extends React.Component{
   }
 }
 
+
 class ProductCard extends React.Component{
-
-  constructor(props){
-    super(props);
-   
-  };
-
   render(){
     return (
       <Link to={"/detail-page/"+this.props.item.itemId} target="_blank">
@@ -99,7 +93,6 @@ class ProductList extends React.Component {
           }  
         </div>
       </div>
-
     )
   }
 }

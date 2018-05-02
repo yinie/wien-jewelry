@@ -25,10 +25,7 @@ class App extends React.Component{
     fire.database().ref('Items').once('value').then((snapshot)=>{
       this.setState({productItems: snapshot.val()});
     });
-
-    
     fire.auth().onAuthStateChanged((user) => {
-      console.log(user)
       if (user) {
         this.setState({loggedIn:true});
       } else {

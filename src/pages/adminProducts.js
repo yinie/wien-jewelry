@@ -155,7 +155,7 @@ class ProductForm extends React.Component{
 	}
 
 	render(){
-		const { itemName, category, material,price,description,colors,images } = this.state;
+		const { itemName, category, material,price,description } = this.state;
 		return(
 			<div className="form-container">
 				<h1>Add New Product</h1>

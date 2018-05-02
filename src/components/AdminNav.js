@@ -17,7 +17,6 @@ class AdminNav extends React.Component{
 
 	componentDidMount(){
 		const user = fire.auth().currentUser;
-		console.log(user)
 		this.setState({
 			userName: user.displayName,
 			photoURL: user.photoURL
@@ -39,7 +38,7 @@ class AdminNav extends React.Component{
 				<ul>
 					{
 						navLinks.map((link, index)=>{
-							if (link == this.props.activeNav){
+							if (link === this.props.activeNav){
 								return(<li key={index} name={link} className='nav-link -active'><Link to={'/admin/'+link}>{link}</Link></li>)
 							}else{
 								return(<li key={index} name={link} className='nav-link'><Link to={'/admin/'+link}>{link}</Link></li>)

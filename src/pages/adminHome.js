@@ -19,7 +19,6 @@ class TableItem extends React.Component{
 		e.preventDefault();
 		const itemRef = e.target.dataset.itemid;
 		const itemIndex = e.target.dataset.index;
-		console.log(itemRef + "   |"+ itemIndex )
 		fire.database().ref('Items/' + itemRef).remove().then(()=>{
 			this.handleDelete(itemIndex)
 		});
@@ -31,7 +30,7 @@ class TableItem extends React.Component{
 		let inventory = 0
 		this.props.item.colors.forEach((color) =>{
 			const colorTemp = color.color
-			inventory = inventory + parseInt(color.inventory) 
+			inventory = inventory + parseInt(color.inventory,10) 
 			colors.push(colorTemp)
 		})
 		const colorNames = colors.toString()

@@ -36,8 +36,8 @@ class Signup extends React.Component{
 
 			).catch(function(error) {
   		// Handle Errors here.
-  		var errorCode = error.code;
-  		var errorMessage = error.message;
+  		//var errorCode = error.code;
+  		//var errorMessage = error.message;
   		// ...
 		});
 		const confModal = document.querySelector('.modal');
@@ -72,7 +72,7 @@ class Signup extends React.Component{
 						<p>Already have an account? <Link className="text-link" to="/signin">Sign in here</Link></p>
 					</div>
 					<div>
-						<img className="cover-img" src={coverImg}/>
+						<img alt="sign in cover" className="cover-img" src={coverImg}/>
 					</div>
 				</div>
 				<div className="overlay"></div>

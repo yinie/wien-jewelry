@@ -76,7 +76,7 @@ class ImageUpload extends React.Component{
     			if (imagePreview ) 
     				return (
     					<div key={index} className="form-block flex-container">
-    						<img className="image-preview" src={imagePreview.imageURL} />
+    						<img alt="product preview" className="image-preview" src={imagePreview.imageURL} />
                 <p className="image-name">{imageNames[index]}</p>
     						<button className="button-delete" onClick={this.deleteImage}><i  data-index={index} className="far fa-trash-alt"></i></button>
     					</div>)

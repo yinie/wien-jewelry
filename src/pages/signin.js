@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import fire from '../components/firebase.js';
 import '../css/adminProduct.css';
 import '../font-awesome/css/fontawesome-all.css'
-import AdminNav from '../components/AdminNav.js';
-import ImageUpload from '../components/Imageupload.js'
 import {createBrowserHistory} from 'history'
 import  coverImg from '../img/signup_cover.jpg'
 const history = createBrowserHistory({})
@@ -30,7 +28,6 @@ class Signin extends React.Component{
   componentDidMount(){
   	fire.auth().onAuthStateChanged(function(user) {
 		  if (user) {
-		   
 		  } else {
 		    // User is signed out.
 		    // ...
@@ -46,8 +43,7 @@ class Signin extends React.Component{
 		  history.push('/admin/products')
 			window.location.reload() 
 		}).catch((error)=>{
-			
-  		var errorCode = error.code;
+  		//var errorCode = error.code;
   		var errorMessage = error.message;
   		this.setState({errorMsg:errorMessage})
 		});
@@ -71,7 +67,7 @@ class Signin extends React.Component{
 					<p>Don't have an account? <Link className="text-link" to="/signup">Create an account</Link></p>
 				</div>
 				<div>
-					<img className="cover-img" src={coverImg}/>
+					<img alt="sign in cover" className="cover-img" src={coverImg}/>
 				</div>
 			</div>
 
