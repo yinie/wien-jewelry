@@ -33,7 +33,7 @@ class AddColor extends React.Component{
 		const tempState = JSON.parse(JSON.stringify(this.state.colors))
 		const index = e.target.dataset.index
 		tempState.splice(index, 1);
-		 this.setState({
+		this.setState({
 			colors: tempState
 		})
 		this.handleColorChange(tempState);

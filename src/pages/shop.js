@@ -36,8 +36,7 @@ class ProductCard extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = {
-    }
+   
   };
 
   render(){
@@ -99,8 +98,6 @@ class ProductList extends React.Component {
             })  
           }  
         </div>
-        <Link to="/detail-page">Details</Link>;
-        
       </div>
 
     )

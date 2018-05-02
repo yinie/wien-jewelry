@@ -222,7 +222,7 @@ textarea:focus{
 	background-color:transparent;
 	color: $primary-color;
 	font-size: 16px;
-	padding-top:16px;
+	
 }
 
 .modal{
@@ -296,3 +296,54 @@ textarea:focus{
 	position:absolute;
 	right:5%;
 }
+
+.table-item{
+	line-height:36px;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:16px;
+	color:rgba(0,0,0,0.6);
+	font-size:15px;
+	font-weight: 300;
+	width:720px;
+	border-bottom: 1px solid $divider-light;
+	display:flex;
+
+}
+
+.table-header{
+	margin-top:48px;
+	padding-left:16px;
+	background-color: #FAFAFA;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	font-size:12px;
+	font-weight:300;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.item-name{
+	width:190px;
+}
+.item-material{
+	width: 150px;
+}
+
+.item-price{
+	width:80px;
+}
+.item-colors{
+	width: 170px
+}
+.item-inventory{
+	width:80px;
+}
+
+
+
+
+
+
+
+

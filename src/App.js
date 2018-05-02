@@ -22,7 +22,6 @@ class App extends React.Component{
   }
 
   componentDidMount(){
-    // fire.auth().signOut()
     fire.database().ref('Items').once('value').then((snapshot)=>{
       this.setState({productItems: snapshot.val()});
     });
@@ -63,7 +62,7 @@ class App extends React.Component{
               )
             )}/>
             
-            <Route path="/admin/home" render={() => <AdminHome />} />
+            <Route path="/admin/home" render={() => <AdminHome productItems={this.state.productItems}/>} />
             <Route path="/shop" render={() => <ProductList productItems={this.state.productItems}/>} />
             <Route path="/detail-page/:id" render={({match}) => <DetailPage match={match} productItems={this.state.productItems}/>} />
 
